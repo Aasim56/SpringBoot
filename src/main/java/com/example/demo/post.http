@@ -1,0 +1,10 @@
+#PUT http://localhost:8080/student/native/id/1/attendance?attendance=presentNative
+GET http://localhost:8080/student/1
+
+
+
+
+
+
+
+
