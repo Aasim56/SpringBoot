@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.SchoolClassRequestDTO;
 import com.example.demo.dto.SchoolClassResponseDTO;
 import com.example.demo.dto.StudentResponseDTO;
 import com.example.demo.entity.SchoolClass;
@@ -14,6 +15,18 @@ public class SchoolClassService {
 
     public SchoolClassService(SchoolClassRepository repository) {
         this.repository = repository;
+    }
+
+    public SchoolClassRequestDTO createSchoolClass(SchoolClassRequestDTO dto) {
+        SchoolClass schoolClass = new SchoolClass();
+
+        schoolClass.setName(dto.getName());
+
+        SchoolClass savedClass = repository.save(schoolClass);
+        return new SchoolClassRequestDTO(
+                savedClass.getId(),
+                savedClass.getName()
+        );
     }
 
     public SchoolClassResponseDTO getClassById(@PathVariable int id){
