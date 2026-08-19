@@ -1,12 +1,6 @@
+GET http://localhost:8080/classes/1
 
-POST http://localhost:8080/students?classId=1
-Content-Type: application/json
 
-{
-  "name": "Asimclassid",
-  "attendance": "Z",
-  "age": 11
-}
 
 
 

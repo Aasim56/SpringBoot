@@ -1,22 +1,29 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.SchoolClassResponseDTO;
 import com.example.demo.entity.SchoolClass;
 import com.example.demo.repository.SchoolClassRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.service.SchoolClassService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SchoolClassController {
-    private final SchoolClassRepository repository;
 
-    public SchoolClassController(SchoolClassRepository repository) {
-        this.repository = repository;
+    private final SchoolClassService schoolClassService;
+
+    public SchoolClassController(SchoolClassService schoolClassService) {
+        this.schoolClassService = schoolClassService;
     }
 
-    @PostMapping("/classes")
-    public SchoolClass createschoolclass(@RequestBody SchoolClass schoolClass){
-        return repository.save(schoolClass);
+
+//    @PostMapping("/classes")
+//    public SchoolClass createschoolclass(@RequestBody SchoolClass schoolClass){
+//        return schoolClassService.;
+//    }
+
+    @GetMapping("/classes/{id}")
+    public SchoolClassResponseDTO getStudentByClassId(@PathVariable int id){
+        return schoolClassService.getClassById(id);
     }
 
 }

@@ -100,8 +100,6 @@ public class StudentService {
 
         }
 
-
-
     public List<Student> getStudentByName(String name){
        return studentRepository.findByName(name);
 
@@ -189,7 +187,6 @@ public class StudentService {
                 ))
                 .toList();
     }
-
 
     @Transactional
     public int updateAttendanceNative(String attendance, int id ){

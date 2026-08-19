@@ -1,10 +1,10 @@
 package com.example.demo.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class SchoolClass {
@@ -15,6 +15,10 @@ public class SchoolClass {
     private Integer id;
 
     private String name;
+
+
+    @OneToMany(mappedBy = "schoolClass")
+    private List<Student> students = new ArrayList<>();
 
     public SchoolClass(){
 
@@ -40,5 +44,13 @@ public class SchoolClass {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }
