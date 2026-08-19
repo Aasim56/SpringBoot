@@ -1,8 +1,14 @@
-package com.example.demo;
+package com.example.demo.service;
 
 
+import com.example.demo.dto.StudentRequestDTO;
+import com.example.demo.dto.StudentResponseDTO;
+import com.example.demo.entity.SchoolClass;
+import com.example.demo.entity.Student;
+import com.example.demo.exception.StudentNotFoundException;
+import com.example.demo.repository.SchoolClassRepository;
+import com.example.demo.repository.StudentRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 
@@ -12,18 +18,27 @@ import java.util.List;
 @Service
 public class StudentService {
 
+    private final SchoolClassRepository schoolClassRepository;
+
+
+
     private final StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, SchoolClassRepository schoolClassRepository) {
         this.studentRepository = studentRepository;
+        this.schoolClassRepository = schoolClassRepository;
     }
 
-    public StudentResponseDTO addStudent(StudentRequestDTO dto) {
+    public StudentResponseDTO addStudent(StudentRequestDTO dto, int classId) {
+
+        SchoolClass schoolClass = schoolClassRepository.findById(classId).orElseThrow(()-> new RuntimeException("Class not found with ID : " + classId));
+
         Student student = new Student();
 
         student.setName(dto.getName());
         student.setAge(dto.getAge());
         student.setAttendance(dto.getAttendance());
+        student.setSchoolClass(schoolClass);
 
         Student savedStudent = studentRepository.save(student);
 

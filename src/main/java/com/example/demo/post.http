@@ -1,5 +1,12 @@
-#PUT http://localhost:8080/student/native/id/1/attendance?attendance=presentNative
-GET http://localhost:8080/student/1
+
+POST http://localhost:8080/students?classId=1
+Content-Type: application/json
+
+{
+  "name": "Asimclassid",
+  "attendance": "Z",
+  "age": 11
+}
 
 
 

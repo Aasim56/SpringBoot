@@ -1,5 +1,9 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.entity.Student;
+import com.example.demo.dto.StudentRequestDTO;
+import com.example.demo.dto.StudentResponseDTO;
+import com.example.demo.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,8 +21,8 @@ public class StudentController {
 
 //    CONTROLLER FOR ADDING STUDENT-----------------------------------
     @PostMapping("/students")
-    public StudentResponseDTO addStudent(@Valid @RequestBody StudentRequestDTO dto) {
-        return studentService.addStudent(dto);
+    public StudentResponseDTO addStudent(@Valid @RequestBody StudentRequestDTO dto, @RequestParam int classId) {
+        return studentService.addStudent(dto, classId);
     }
 
 //    CONTROLLER FOR VIEWING ALL STUDENTS-----------------------------

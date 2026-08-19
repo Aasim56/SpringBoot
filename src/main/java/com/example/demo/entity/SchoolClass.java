@@ -1,11 +1,10 @@
-package com.example.demo;
+package com.example.demo.entity;
 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
 
 @Entity
 public class SchoolClass {
@@ -13,14 +12,15 @@ public class SchoolClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
     private String name;
 
     public SchoolClass(){
 
     }
 
-    public SchoolClass (int id, String name){
+    public SchoolClass (Integer id, String name){
         this.id = id;
         this.name = name;
     }
@@ -30,7 +30,7 @@ public class SchoolClass {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

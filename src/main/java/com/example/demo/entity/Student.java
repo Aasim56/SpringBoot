@@ -1,9 +1,6 @@
-package com.example.demo;
+package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Student {
@@ -15,6 +12,13 @@ public class Student {
     private String name;
     private int age;
     private String attendance;
+
+
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private SchoolClass schoolClass;
+
+
 
     public Student(){
 
@@ -58,5 +62,13 @@ public class Student {
 
     public void setAttendance(String attendance) {
         this.attendance = attendance;
+    }
+
+    public SchoolClass getSchoolClass() {
+        return schoolClass;
+    }
+
+    public void setSchoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
     }
 }

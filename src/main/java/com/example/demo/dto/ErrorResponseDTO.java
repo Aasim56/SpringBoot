@@ -1,6 +1,5 @@
-package com.example.demo;
+package com.example.demo.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 

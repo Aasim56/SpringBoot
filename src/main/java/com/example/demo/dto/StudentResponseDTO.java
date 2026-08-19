@@ -1,6 +1,4 @@
-package com.example.demo;
-
-import org.antlr.v4.runtime.misc.NotNull;
+package com.example.demo.dto;
 
 public class StudentResponseDTO {
     private Integer id;
