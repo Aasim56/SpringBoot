@@ -1,7 +1,6 @@
-package com.example.demo.dto;
+package com.example.demo.dto.schoolclass;
 
-import com.example.demo.entity.Student;
-import org.springframework.context.annotation.Bean;
+import com.example.demo.dto.student.StudentResponseDTO;
 
 import java.util.List;
 

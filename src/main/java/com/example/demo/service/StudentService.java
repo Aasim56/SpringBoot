@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
 
-import com.example.demo.dto.StudentRequestDTO;
-import com.example.demo.dto.StudentResponseDTO;
+import com.example.demo.dto.student.StudentRequestDTO;
+import com.example.demo.dto.student.StudentResponseDTO;
+import com.example.demo.entity.Passport;
 import com.example.demo.entity.SchoolClass;
 import com.example.demo.entity.Student;
 import com.example.demo.exception.StudentNotFoundException;
+import com.example.demo.repository.PassportRepository;
 import com.example.demo.repository.SchoolClassRepository;
 import com.example.demo.repository.StudentRepository;
 import jakarta.transaction.Transactional;
@@ -19,14 +21,33 @@ import java.util.List;
 public class StudentService {
 
     private final SchoolClassRepository schoolClassRepository;
-
-
-
+    private final PassportRepository passportRepository;
     private final StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository, SchoolClassRepository schoolClassRepository) {
+    public StudentService(StudentRepository studentRepository, SchoolClassRepository schoolClassRepository, PassportRepository passportRepository) {
         this.studentRepository = studentRepository;
         this.schoolClassRepository = schoolClassRepository;
+        this.passportRepository = passportRepository;
+    }
+
+
+    public StudentResponseDTO assignPassport(int studentId, int passportId){
+
+        Student student = studentRepository.findById(studentId).orElseThrow(()
+                -> new StudentNotFoundException("Student not found with ID : " + studentId));
+
+        Passport passport = passportRepository.findById(passportId).orElseThrow(()
+        -> new StudentNotFoundException("Passport not found with ID : "  + passportId));
+
+        student.setPassport(passport);
+        Student savedStudent = studentRepository.save(student);
+
+        return new StudentResponseDTO(
+                savedStudent.getId(),
+                savedStudent.getName(),
+                savedStudent.getAge(),
+                savedStudent.getAttendance()
+        );
     }
 
     public StudentResponseDTO addStudent(StudentRequestDTO dto, int classId) {

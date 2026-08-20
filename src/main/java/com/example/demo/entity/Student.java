@@ -20,6 +20,11 @@ public class Student {
     private SchoolClass schoolClass;
 
 
+    @OneToOne
+    @JoinColumn(name = "passport_id")
+    private Passport passport;
+
+
 
     public Student(){
 
@@ -71,5 +76,13 @@ public class Student {
 
     public void setSchoolClass(SchoolClass schoolClass) {
         this.schoolClass = schoolClass;
+    }
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 }

@@ -1,13 +1,17 @@
-package com.example.demo.dto;
+package com.example.demo.dto.student;
 
 public class StudentResponseDTO {
     private Integer id;
     private String name;
     private int age;
     private String attendance;
+
+
     public StudentResponseDTO(){
 
     }
+
+
     public StudentResponseDTO(Integer id, String name, int age, String attendance){
         this.id = id;
         this.name = name;
@@ -46,4 +50,7 @@ public class StudentResponseDTO {
     public void setAttendance(String attendance) {
         this.attendance = attendance;
     }
+
+
 }
+

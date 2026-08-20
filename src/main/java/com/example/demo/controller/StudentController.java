@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Student;
-import com.example.demo.dto.StudentRequestDTO;
-import com.example.demo.dto.StudentResponseDTO;
+import com.example.demo.dto.student.StudentRequestDTO;
+import com.example.demo.dto.student.StudentResponseDTO;
 import com.example.demo.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -129,6 +129,12 @@ public class StudentController {
 
         if (updated == 0) return "Student not found";
         return "Student updated successfully";
+    }
+
+    @GetMapping("/{studentId}/passport/{passportId}")
+    public StudentResponseDTO assignPassport(@PathVariable int studentId,
+                                             @PathVariable int passportId){
+        return studentService.assignPassport(studentId,passportId);
     }
 
 }

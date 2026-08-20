@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.SchoolClassRequestDTO;
-import com.example.demo.dto.SchoolClassResponseDTO;
-import com.example.demo.dto.StudentResponseDTO;
+import com.example.demo.dto.schoolclass.SchoolClassRequestDTO;
+import com.example.demo.dto.schoolclass.SchoolClassResponseDTO;
+import com.example.demo.dto.student.StudentResponseDTO;
 import com.example.demo.entity.SchoolClass;
 import com.example.demo.repository.SchoolClassRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,6 @@ public class SchoolClassService {
 
         SchoolClass savedClass = repository.save(schoolClass);
         return new SchoolClassRequestDTO(
-                savedClass.getId(),
                 savedClass.getName()
         );
     }

@@ -1,4 +1,6 @@
-GET http://localhost:8080/classes/2
+GET http://localhost:8080/
+
+
 
 
 
