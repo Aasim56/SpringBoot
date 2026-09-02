@@ -14,6 +14,10 @@ import com.example.demo.repository.SchoolClassRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.repository.SubjectRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -242,6 +246,46 @@ public class StudentService {
         student.setSubjects(subjects);
         return studentRepository.save(student);
     }
+
+   public Page<Student> getStudent(
+           int page,
+           int size){
+
+        Pageable pageable =
+                PageRequest.of(page,
+                        size);
+
+        return studentRepository.findAll(pageable);
+   }
+
+   public Page<StudentResponseDTO> getStudent(
+           int page,
+           int size,
+           String sortBy,
+           String direction){
+
+        Sort sort;
+
+        if (direction.equalsIgnoreCase("desc")){
+            sort = Sort.by(sortBy).descending();
+        }else {
+            sort = Sort.by(sortBy).ascending();
+        }
+
+        Pageable pageable =
+                PageRequest.of(
+                page, size, sort);
+
+        Page<Student> students = studentRepository.findAll(pageable);
+
+
+        return students.map(student -> new StudentResponseDTO(
+                student.getId(),
+                student.getName(),
+                student.getAge(),
+                student.getAttendance()
+        ));
+   }
 
 }
 
