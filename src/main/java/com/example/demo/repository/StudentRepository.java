@@ -70,4 +70,9 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
             @Param("attendance") String attendance,
             @Param("id") int id
     );
+
+    @Query("""
+    SELECT s FROM Student s JOIN FETCH s.schoolClass
+    """)
+    List<Student> findAllWithSchoolClass();
 }

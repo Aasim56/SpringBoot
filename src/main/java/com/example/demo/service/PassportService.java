@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.dto.passport.PassportRequestDTO;
 import com.example.demo.dto.passport.PassportResponseDTO;
+import com.example.demo.dto.student.StudentResponseDTO;
 import com.example.demo.entity.Passport;
+import com.example.demo.entity.Student;
 import com.example.demo.repository.PassportRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,5 @@ public class PassportService {
                 savedPassport.getName()
         );
     }
-
 
 }

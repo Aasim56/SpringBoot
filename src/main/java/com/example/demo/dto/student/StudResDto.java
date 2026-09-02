@@ -1,18 +1,24 @@
 package com.example.demo.dto.student;
 
-public class StudentResponseDTO {
+public class StudResDto {
+
     private Integer id;
     private String name;
     private int age;
     private String attendance;
+    private String className;
 
-    public StudentResponseDTO(){}
 
-    public StudentResponseDTO(Integer id, String name, int age, String attendance){
+    public StudResDto() {
+    }
+
+    public StudResDto(Integer id, String name, int age, String attendance, String className) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.attendance = attendance;
+        this.className = className;
+
     }
 
     public Integer getId() {
@@ -48,5 +54,12 @@ public class StudentResponseDTO {
     }
 
 
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 }
 

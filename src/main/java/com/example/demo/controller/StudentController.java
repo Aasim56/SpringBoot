@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.student.StudResDto;
 import com.example.demo.entity.Student;
 import com.example.demo.dto.student.StudentRequestDTO;
 import com.example.demo.dto.student.StudentResponseDTO;
@@ -136,5 +137,18 @@ public class StudentController {
                                              @PathVariable int passportId){
         return studentService.assignPassport(studentId,passportId);
     }
+
+    @GetMapping("/testn1")
+    public List<StudResDto> testNPlusOneProblem(){
+        return studentService.getStudentAndClass();
+    }
+
+    @PutMapping("/students/{studentId}/subjects")
+    public Student assignStudent(@PathVariable int studentId,
+                                 @RequestBody List<Integer> subjectIds){
+        return studentService.assignSubjects(studentId, subjectIds);
+    }
+
+
 
 }

@@ -1,15 +1,18 @@
 package com.example.demo.service;
 
 
+import com.example.demo.dto.student.StudResDto;
 import com.example.demo.dto.student.StudentRequestDTO;
 import com.example.demo.dto.student.StudentResponseDTO;
 import com.example.demo.entity.Passport;
 import com.example.demo.entity.SchoolClass;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Subject;
 import com.example.demo.exception.StudentNotFoundException;
 import com.example.demo.repository.PassportRepository;
 import com.example.demo.repository.SchoolClassRepository;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.repository.SubjectRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +26,13 @@ public class StudentService {
     private final SchoolClassRepository schoolClassRepository;
     private final PassportRepository passportRepository;
     private final StudentRepository studentRepository;
+    private final SubjectRepository subjectRepository;
 
-    public StudentService(StudentRepository studentRepository, SchoolClassRepository schoolClassRepository, PassportRepository passportRepository) {
+    public StudentService(StudentRepository studentRepository, SchoolClassRepository schoolClassRepository, PassportRepository passportRepository, SubjectRepository subjectRepository) {
         this.studentRepository = studentRepository;
         this.schoolClassRepository = schoolClassRepository;
         this.passportRepository = passportRepository;
+        this.subjectRepository = subjectRepository;
     }
 
 
@@ -212,6 +217,30 @@ public class StudentService {
     @Transactional
     public int updateAttendanceNative(String attendance, int id ){
         return studentRepository.updateAttendanceNative(attendance, id);
+    }
+
+    public List<StudResDto> getStudentAndClass(){
+        List<Student> students = studentRepository.findAllWithSchoolClass();
+
+        return students.stream().map(student -> new StudResDto(
+                student.getId(),
+                student.getName(),
+                student.getAge(),
+                student.getAttendance(),
+                student.getSchoolClass().getName()
+        )).toList();
+
+    }
+
+
+    public Student assignSubjects(int studentId, List<Integer> subjectIds){
+
+        Student student = studentRepository.findById(studentId).orElseThrow(()
+                -> new RuntimeException("Student not found"));
+
+        List<Subject> subjects = subjectRepository.findAllById(subjectIds);
+        student.setSubjects(subjects);
+        return studentRepository.save(student);
     }
 
 }

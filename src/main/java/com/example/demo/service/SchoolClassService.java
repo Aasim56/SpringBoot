@@ -8,6 +8,8 @@ import com.example.demo.repository.SchoolClassRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Service
 public class SchoolClassService {
 
@@ -33,6 +35,8 @@ public class SchoolClassService {
         SchoolClass schoolClass = repository.findById(id)
                 .orElseThrow(()
                 -> new RuntimeException("Class not found with ID : " +id));
+
+        System.out.println("Class name : " + schoolClass.getName());
 
         return new SchoolClassResponseDTO(
                 schoolClass.getId(),

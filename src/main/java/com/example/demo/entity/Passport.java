@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.context.annotation.Lazy;
 
 @Entity
 public class Passport {
@@ -14,6 +12,7 @@ public class Passport {
     private String passport_name;
 
     @OneToOne(mappedBy = "passport")
+    @Lazy
     private Student students;
 
     public Passport(){
@@ -40,14 +39,5 @@ public class Passport {
 
     public void setName(String passport_name) {
         this.passport_name = passport_name;
-    }
-
-
-    public Student getStudents() {
-        return students;
-    }
-
-    public void setStudents(Student students) {
-        this.students = students;
     }
 }
