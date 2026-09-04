@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.Subject.StudentResponsedto;
 import com.example.demo.dto.student.StudResDto;
 import com.example.demo.entity.Student;
 import com.example.demo.dto.student.StudentRequestDTO;
 import com.example.demo.dto.student.StudentResponseDTO;
 import com.example.demo.service.StudentService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -147,6 +149,21 @@ public class StudentController {
     public Student assignStudent(@PathVariable int studentId,
                                  @RequestBody List<Integer> subjectIds){
         return studentService.assignSubjects(studentId, subjectIds);
+    }
+
+    @GetMapping("/studentes")
+    public Page<StudentResponseDTO> getStudent(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction
+    ){
+        return studentService.getStudent(
+                page,
+                size,
+                sortBy,
+                direction
+        );
     }
 
 

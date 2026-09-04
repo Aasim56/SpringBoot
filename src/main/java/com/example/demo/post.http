@@ -1,5 +1,4 @@
-GET http://localhost:8080/subjects/1
-
+GET http://localhost:8080/studentes?page=0&size=3&direction=desc&sortBy=age
 
 
 
