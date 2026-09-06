@@ -53,8 +53,6 @@ public class StudentController {
     public StudentResponseDTO updateStudent(@Valid @PathVariable int id,
                                             @RequestBody StudentRequestDTO dto){
         return studentService.updateStudent(id,dto);
-
-
     }
 
 //    CONTROLLER FOR VIEWING STUDENT BY NAME
