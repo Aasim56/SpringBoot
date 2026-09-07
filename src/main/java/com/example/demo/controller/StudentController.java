@@ -6,6 +6,8 @@ import com.example.demo.entity.Student;
 import com.example.demo.dto.student.StudentRequestDTO;
 import com.example.demo.dto.student.StudentResponseDTO;
 import com.example.demo.service.StudentService;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -164,6 +166,8 @@ public class StudentController {
         );
     }
 
-
-
+    @GetMapping("/greet")
+    public String greet(HttpServletRequest request){
+        return "Welcome to Spring security " + request.getSession().getId();
+    }
 }
